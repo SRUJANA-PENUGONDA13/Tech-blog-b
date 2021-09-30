@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Tangerine"
+    />
+    <title>Technical Blog</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <div class="blog-heading">
+          <h1>Installing and setting up git in local</h1>
+          <h4>Created On : 09 Se 2021</h4>
+        </div>
+      </header>
+      <article class="blog-content">
+        <p>
+          GIT is Source Code Management System. It is free open source version
+          control system to track any kind of projects
+        </p>
+        <h3>
+          This blogs helps to installing and setting up git in local machine
+        </h3>
+        <ol type="1">
+          <li>
+            <p>
+              Install git from below official website for windows<br />
+              <a href="https://git-scm.com/downloads"
+                >https://git-scm.com/downloads</a
+              >
+            </p>
+          </li>
+          <li>
+            <p>
+              After git got installed. Open git command prompt in local and tell
+              the git who you are using below commands<br />
+              <b
+                >git config --global user.name "YOUR_USERNAME" <br />
+                git config --global user.email "YOUR_EMAIL"</b
+              ><br />
+            </p>
+          </li>
+          <li>
+            <p>
+              After configuration is set use below command to check whether your
+              details are correct or not<br />
+              <b>git config --global --list</b>
+            </p>
+          </li>
+
+          <li>
+            <p>Setup SSH using by following below steps</p>
+            <ol type="a">
+              <li>
+                <p>
+                  Generate SSH keys using below command by using your github
+                  email address<br />
+                  <b>ssh-keygen -t ed25519 -C "github_email_address"</b>
+                </p>
+              </li>
+              <li>
+                <p>
+                  When you're prompted to "Enter a file in which to save the
+                  key," press Enter to save in default file location otherwise
+                  provide your desired path.<br />
+                  <b
+                    >Enter a file in which to save the key
+                    (/c/Users/you/.ssh/id_rsa):[Press enter]</b
+                  >
+                </p>
+              </li>
+              <li>
+                <p>
+                  At the prompt, type a secure passphrase. if you have any
+                  otherwise press enter<br />
+                  <b>
+                    Enter passphrase (empty for no passphrase): [Type a
+                    passphrase]<br />
+                    Enter same passphrase again: [Type passphrase again]</b
+                  >
+                </p>
+              </li>
+              <li>
+                <p>Add your SSH key to the ssh-agent</p>
+                <ol type="a">
+                  <li>
+                    <p>
+                      Ensure the ssh-agent is running. You can use the
+                      "Auto-launching the ssh-agent" instructions in your
+                      passphrase, or start it manually using below command<br />
+                      <b>eval `ssh-agent -s`</b>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Once ssh-agent is started add your ssh-key to your
+                      ssh-agent using below command<br />
+                      <b>ssh-add ~/.ssh/id_rsa</b>
+                    </p>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <p>
+              After adding ssh-key to ssh-agent. Copy the SSH public key to
+              clipboard using below command<br />
+              <b>clip < ~/.ssh/id_rsa.pub</b>
+            </p>
+          </li>
+          <li>
+            <p>
+              Copy SSH public key to GITHUB by following below steps
+              <ol type="a">
+                  <li><p>Open your gihub account in the browser</p></li>
+                  <li><p>Click on your profile photo in the upper right corner of the page, then click settings</p></li>
+                  <li><p>In the user settings sidebar, click SSH and GPG keys.</p></li>
+                  <li><p>Click New SSH key or Add SSH key.</p></li>
+                  <li><p>In the "Title" field, add a descriptive label for the new key. For example, if you're using a personal Mac, you might call this key "Personal MacBook" and paste your key into "Key" field then save it</p></li>
+              </ol>
+            </p>
+          </li>
+        <li>
+            <p>Once SSH setup is done, Use below command in your git command prompt to test your ssh connection
+              <br>
+              <b>ssh -T git@github.com</b>
+            </p>
+        </li>
+        <li>
+            <p><span><b>Note: </b></span>If you get any error like Permission denied (publickey) error when using Git, Make sure ssh is running in the same where you saved your ssh-keys initially.
+              <br>
+              Use below commands to reregister your SSH key to correct path
+              <br>
+              <b>eval `ssh-agent -s`</b><br>
+			    <b>ssh-add ~/../You/.ssh/id_rsa</b>
+            </p>
+        </li>
+        <li>
+            <p>After setting up the configuration and ssh key use below command to initialize your git repository
+              <br>
+              git init
+            </p>
+        </li>
+        <li>
+            <p>Add files to the Staging Area for commit using below command
+              <ol type="a">
+                  <b><li>git add .</li>
+                  <li>git add README.md # To add a specific file</li></b>
+              </ol>
+            </p>
+        </li>
+        <li>
+            <p>Before we commit let’s see what files are staged:<br>
+                <b>git status # Lists all new or modified files to be committed</b>
+            </p>
+        </li>
+        <li>
+            <p>Commit Changes you made to your Git Repo: <br>
+                <b>git commit -m "First commit"# The message in the " " is given so that the other users can read the message and see what changes you made</b>
+            </p>
+        </li>
+        <li>
+            <p>Uncommit Changes you just made to your Git Repo: <br>
+                <b>git reset HEAD~1 # Remove the most recent commit# Commit again!</b>
+            </p>
+        </li>
+        <li>
+            <p>Add a remote origin and Push:<br>
+                <b> git remote add origin remote_repository_URL</b>
+            </p>
+        </li>
+        <li>
+            <p>To push changes to origin: <br>
+                <b>git push -u origin "branchName"</b>
+            </p>
+        </li>
+        <li>
+            <p>To show the file changes not yet staged: <br>
+                <b>git diff</b>
+            </p>
+        </li>
+        <li>
+            <p>To clone remote repository: <br>
+                <b>git clone remote_repository_URL</b>
+            </p>
+        </li>
+        <li>
+            <p>To view git commit history: <br>
+                <b>git log</b>
+            </p>
+        </li>
+        <li>
+            <p>To remove all untracked files and folders <br>
+                <b>git clean -fd </b>
+            </p>
+        </li>
+        </ol>
+      </article>
+    </div>
+  </body>
+</html>
